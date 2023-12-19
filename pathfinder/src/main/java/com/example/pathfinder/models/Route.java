@@ -3,7 +3,7 @@ package com.example.pathfinder.models;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.example.pathfinder.models.enums.UserLevels;
+import com.example.pathfinder.models.enums.Level;
 import jakarta.persistence.*;
 
 
@@ -18,7 +18,7 @@ public class Route {
     private String gpxCoordinates;
 
     @Enumerated(EnumType.STRING)
-    private UserLevels level;
+    private Level level;
 
     private String name;
 
@@ -77,11 +77,11 @@ public class Route {
         this.gpxCoordinates = gpxCoordinates;
     }
 
-    public UserLevels getLevel() {
+    public Level getLevel() {
         return level;
     }
 
-    public void setLevel(UserLevels level) {
+    public void setLevel(Level level) {
         this.level = level;
     }
 
@@ -115,5 +115,15 @@ public class Route {
 
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
+    }
+
+
+    public String getDescription() {
+        return description;
+    }
+
+
+    public void setDescription(String description) {
+        this.description = description;
     }    
 }

@@ -4,25 +4,27 @@
             <a href="/">Home</a>
         </li>
         <li>
-            <a href="/login">Login</a>
+            <a th:href="@{/about}">About</a>
         </li>
-        <li>
-            <a href="/register">Register</a>
+        <li th:unless="${@loggedUser.isLogged}">
+            <a th:href="@{/users/login}">Login</a>
         </li>
-        <li>
-            <a href="/">About</a>
+        <li th:unless="${@loggedUser.isLogged}">
+            <a th:href="@{/users/register}">Register</a>
         </li>
-        <li>
-            <a href="/">Add new route</a>
+        <li th:if="${@loggedUser.isLogged}">
+            <a th:href="@{/routes/add}">Add new route</a>
         </li>
-        <li>
+        <li th:if="${@loggedUser.isLogged}">
             <a href="/">Profile</a>
         </li>
-        <li>
+        <li th:if="${@loggedUser.isLogged}">
             <a href="/">Admin</a>
         </li>
-        <li>
-            <a href="/">Logout</a>
+        <li th:if="${@loggedUser.isLogged}">
+            <form th:action="@{users/logout}" th:method="post">
+                <input type="submit" value="Logout" />
+            </form>
         </li>
     </ul>
 </nav>
