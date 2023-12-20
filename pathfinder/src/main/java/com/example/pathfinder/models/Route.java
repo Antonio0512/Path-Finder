@@ -126,4 +126,8 @@ public class Route {
     public void setDescription(String description) {
         this.description = description;
     }    
+
+    public void addCategories(Set<Category> categories) {
+        this.categories.addAll(categories);
+    }
 }

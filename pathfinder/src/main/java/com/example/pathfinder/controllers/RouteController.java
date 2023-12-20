@@ -10,14 +10,17 @@ import com.example.pathfinder.models.dto.CreateRouteDTO;
 import com.example.pathfinder.models.enums.Level;
 import com.example.pathfinder.models.enums.RouteCategory;
 import com.example.pathfinder.services.RouteService;
+import com.example.pathfinder.services.session.LoggedUser;
 
 @Controller
 @RequestMapping("/routes")
 public class RouteController {
     private final RouteService routeService;
+    private final LoggedUser loggedUser;
 
-    public RouteController(RouteService routeService) {
+    public RouteController(RouteService routeService, LoggedUser loggedUser) {
         this.routeService = routeService;
+        this.loggedUser = loggedUser;
     }
 
     @GetMapping("/add")
@@ -32,7 +35,7 @@ public class RouteController {
 
     @PostMapping("/add")
     public ModelAndView addRoute(CreateRouteDTO createRouteDTO) {        
-        routeService.addRoute(createRouteDTO);
+        routeService.addRoute(createRouteDTO, loggedUser);
 
         return new ModelAndView("redirect:/");
     }
