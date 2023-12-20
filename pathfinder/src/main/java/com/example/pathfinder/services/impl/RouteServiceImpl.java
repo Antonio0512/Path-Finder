@@ -1,5 +1,6 @@
 package com.example.pathfinder.services.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import org.modelmapper.ModelMapper;
@@ -9,6 +10,7 @@ import com.example.pathfinder.models.Category;
 import com.example.pathfinder.models.Route;
 import com.example.pathfinder.models.User;
 import com.example.pathfinder.models.dto.CreateRouteDTO;
+import com.example.pathfinder.models.dto.RouteGetAllViewModel;
 import com.example.pathfinder.repositories.AuthRepository;
 import com.example.pathfinder.repositories.CategoryRepository;
 import com.example.pathfinder.repositories.RouteRepository;
@@ -41,5 +43,12 @@ public class RouteServiceImpl implements RouteService {
         route.setAuthor(user);
         
         routeRepository.save(route);
+    }
+
+    @Override
+    public List<RouteGetAllViewModel> getAll() {
+        return routeRepository.findAll().stream()
+              .map(route -> modelMapper.map(route, RouteGetAllViewModel.class))
+              .toList();
     }
 }

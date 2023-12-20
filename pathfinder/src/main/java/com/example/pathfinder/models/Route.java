@@ -28,7 +28,11 @@ public class Route {
     @ManyToOne
     private User author;
 
+    @Column(name = "video_url")
     private String videoUrl;
+
+    @Column(name = "image_url")
+    private String imageUrl;
 
     @OneToMany(targetEntity = Comment.class, mappedBy = "route", cascade = CascadeType.ALL)
     private Set<Comment> comments;
@@ -129,5 +133,15 @@ public class Route {
 
     public void addCategories(Set<Category> categories) {
         this.categories.addAll(categories);
+    }
+
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }

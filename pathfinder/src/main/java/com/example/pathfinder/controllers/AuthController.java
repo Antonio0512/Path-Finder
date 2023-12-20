@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.pathfinder.models.dto.UserLoginDTO;
+import com.example.pathfinder.models.dto.UserProfileViewModel;
 import com.example.pathfinder.models.dto.UserRegistrationDTO;
 import com.example.pathfinder.services.AuthService;
 import com.example.pathfinder.services.session.LoggedUser;
@@ -53,6 +54,16 @@ public class AuthController {
         authService.logout(loggedUser);
 
         return new ModelAndView("redirect:/");
+    }
+
+    @GetMapping("/details")
+    public ModelAndView profile() {
+        UserProfileViewModel userProfile = authService.getUserProfile(loggedUser);
+        
+        ModelAndView modelAndView = new ModelAndView("profile");
+        modelAndView.addObject("userProfile", userProfile);
+
+        return modelAndView;
     }
 }
 
